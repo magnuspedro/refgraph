@@ -9,8 +9,8 @@ import java.util.UUID
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes(
-    JsonSubTypes.Type(value = Conference::class, name = "conference"),
-    JsonSubTypes.Type(value = Journal::class, name = "journal")
+    JsonSubTypes.Type(value = Conference::class, name = "CONFERENCE"),
+    JsonSubTypes.Type(value = Journal::class, name = "JOURNAL")
 )
 abstract class PublicationMedium(
     id: UUID? = null,

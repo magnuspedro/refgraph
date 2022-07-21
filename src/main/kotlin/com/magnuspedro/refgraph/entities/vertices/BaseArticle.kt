@@ -13,10 +13,10 @@ import java.util.UUID
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes(
-    JsonSubTypes.Type(value = Article::class, name = "article"),
-    JsonSubTypes.Type(value = Book::class, name = "book"),
-    JsonSubTypes.Type(value = InProceedings::class, name = "inproceedings"),
-    JsonSubTypes.Type(value = Thesis::class, name = "thesis")
+    JsonSubTypes.Type(value = Article::class, name = "ARTICLE"),
+    JsonSubTypes.Type(value = Book::class, name = "BOOK"),
+    JsonSubTypes.Type(value = InProceedings::class, name = "INPROCEEDINGS"),
+    JsonSubTypes.Type(value = Thesis::class, name = "THESIS")
 )
 abstract class BaseArticle {
     constructor(

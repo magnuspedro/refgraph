@@ -1,6 +1,6 @@
 spring:
   neo4j:
-    uri: bolt://localhost:7687
+    uri: ${NE04J_URL:bolt://localhost:7687}
     authentication:
       username: ${NEO4_USER:neo4j}
       password: ${NEO4J_PASS:n!J88FY&k^J##lAn}
