@@ -15,7 +15,7 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
-@RequestMapping("/api/v1/refgraph//category")
+@RequestMapping("/api/v1/refgraph/category")
 class CategoryController(
     val categoryRepository: CategoryRepository
 ) {
