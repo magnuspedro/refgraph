@@ -1,5 +1,6 @@
 package com.magnuspedro.refgraph.entities.vertices
 
+import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.data.neo4j.core.schema.GeneratedValue
 import org.springframework.data.neo4j.core.schema.Id
 import org.springframework.data.neo4j.core.schema.Node
@@ -13,6 +14,7 @@ import java.util.UUID
 data class Book(
     @Id
     @GeneratedValue
+    @Schema(hidden = true)
     override val id: UUID? = null,
     override val name: String? = null,
     override val date: LocalDate? = null,

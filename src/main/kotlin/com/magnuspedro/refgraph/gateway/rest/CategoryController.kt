@@ -15,18 +15,18 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @RestController
-@RequestMapping("/api/v1/refgraph")
+@RequestMapping("/api/v1/refgraph//category")
 class CategoryController(
     val categoryRepository: CategoryRepository
 ) {
 
-    @PostMapping("/category")
+    @PostMapping
     fun createArticle(@RequestBody category: Category): Mono<Category> {
         return this.categoryRepository.save(category)
     }
 
-    @GetMapping("/category")
-    fun findAll(): Flux<Category> {
+    @GetMapping
+    fun findAllCategories(): Flux<Category> {
         return this.categoryRepository.findAll()
     }
 }
