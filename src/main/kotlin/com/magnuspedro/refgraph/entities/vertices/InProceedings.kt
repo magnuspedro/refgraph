@@ -14,7 +14,7 @@ import java.util.UUID
 data class InProceedings(
     @Id
     @GeneratedValue
-    @Schema(hidden = true)
+    @field:Schema(hidden = true)
     override val id: UUID? = null,
     override val name: String? = null,
     override val date: LocalDate? = null,
