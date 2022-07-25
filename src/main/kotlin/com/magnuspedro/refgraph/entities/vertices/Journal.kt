@@ -11,7 +11,7 @@ import java.util.UUID
 data class Journal(
     @Id
     @GeneratedValue
-    @field:Schema(hidden = true)
+    @Schema(hidden = true)
     val id: UUID? = null,
     val name: String? = null,
     val date: LocalDate? = null,

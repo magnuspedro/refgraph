@@ -12,7 +12,7 @@ import java.util.UUID
 data class Conference(
     @Id
     @GeneratedValue
-    @field:Schema(hidden = true)
+    @Schema(hidden = true)
     val id: UUID? = null,
     val name: String? = null,
     val initials: String? = null,

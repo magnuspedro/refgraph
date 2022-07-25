@@ -4,3 +4,10 @@ spring:
     authentication:
       username: ${NEO4_USER:neo4j}
       password: ${NEO4J_PASS:n!J88FY&k^J##lAn}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${JWT_URL:}
+          issuer-uri: ${ISSUER_URL:}
+

@@ -10,7 +10,7 @@ import java.util.UUID
 data class Author(
     @Id
     @GeneratedValue
-    @field:Schema(hidden = true)
+    @Schema(hidden = true)
     val id: UUID? = null,
     val name: String? = null
 )

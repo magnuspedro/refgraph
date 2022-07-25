@@ -14,7 +14,7 @@ import java.util.UUID
 data class Book(
     @Id
     @GeneratedValue
-    @field:Schema(hidden = true)
+    @Schema(hidden = true)
     override val id: UUID? = null,
     override val name: String? = null,
     override val date: LocalDate? = null,
