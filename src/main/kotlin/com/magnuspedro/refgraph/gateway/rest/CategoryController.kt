@@ -1,11 +1,7 @@
 package com.magnuspedro.refgraph.gateway.rest
 
-import com.magnuspedro.refgraph.entities.requests.CreateAndRelateArticle
-import com.magnuspedro.refgraph.entities.vertices.Article
 import com.magnuspedro.refgraph.entities.vertices.Category
-import com.magnuspedro.refgraph.entities.vertices.Thesis
 import com.magnuspedro.refgraph.gateway.repository.CategoryRepository
-import com.magnuspedro.refgraph.gateway.repository.ThesisRepository
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.web.bind.annotation.GetMapping

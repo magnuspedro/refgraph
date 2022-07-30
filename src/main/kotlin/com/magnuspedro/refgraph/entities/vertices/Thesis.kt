@@ -16,8 +16,9 @@ data class Thesis(
     @GeneratedValue
     @Schema(hidden = true)
     override val id: UUID? = null,
-    override val name: String? = null,
+    override val title: String? = null,
     val school: String? = null,
+    val code: String? = null,
     override val date: LocalDate? = null,
     @Relationship(type = "CITED", direction = INCOMING)
     override var cited: MutableList<BaseArticle>? = mutableListOf(),
@@ -29,4 +30,4 @@ data class Thesis(
     override var published: PublicationMedium? = null,
     @Relationship(type = "CATEGORY", direction = INCOMING)
     override var category: Category? = null
-) : BaseArticle(id, name, date, cited, referenced, wrote, published, category)
+) : BaseArticle(id, title, date, cited, referenced, wrote, published, category)

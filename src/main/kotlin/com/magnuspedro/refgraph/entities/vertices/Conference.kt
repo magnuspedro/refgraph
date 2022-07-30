@@ -18,4 +18,5 @@ data class Conference(
     val initials: String? = null,
     val date: LocalDate? = null,
     val version: Long? = null,
+    val code: String? = null
 ) : PublicationMedium(id, name, date)

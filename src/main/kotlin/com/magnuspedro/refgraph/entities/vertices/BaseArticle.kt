@@ -3,10 +3,6 @@ package com.magnuspedro.refgraph.entities.vertices
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import org.springframework.data.neo4j.core.schema.GeneratedValue
-import org.springframework.data.neo4j.core.schema.Id
-import org.springframework.data.neo4j.core.schema.Relationship
-import reactor.core.publisher.Mono
 import java.time.LocalDate
 import java.util.UUID
 
@@ -21,7 +17,7 @@ import java.util.UUID
 abstract class BaseArticle {
     constructor(
         id: UUID?,
-        name: String?,
+        title: String?,
         date: LocalDate?,
         cited: MutableList<BaseArticle>?,
         referenced: MutableList<BaseArticle>?,
@@ -30,7 +26,7 @@ abstract class BaseArticle {
         category: Category?)
 
     abstract val id: UUID?
-    abstract val name: String?
+    abstract val title: String?
     abstract val date: LocalDate?
     abstract var cited: MutableList<BaseArticle>?
     abstract var referenced: MutableList<BaseArticle>?

@@ -1,8 +1,6 @@
 package com.magnuspedro.refgraph.gateway.rest
 
-import com.magnuspedro.refgraph.entities.vertices.Article
 import com.magnuspedro.refgraph.entities.vertices.Author
-import com.magnuspedro.refgraph.entities.vertices.InProceedings
 import com.magnuspedro.refgraph.gateway.repository.AuthorRepository
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.security.SecurityRequirement

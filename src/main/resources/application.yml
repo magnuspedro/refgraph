@@ -3,7 +3,7 @@ spring:
     uri: ${NE04J_URL:bolt://localhost:7687}
     authentication:
       username: ${NEO4_USER:neo4j}
-      password: ${NEO4J_PASS:n!J88FY&k^J##lAn}
+      password: ${NEO4J_PASS:!J88FY&k^J##lAn}
   security:
     oauth2:
       resourceserver:

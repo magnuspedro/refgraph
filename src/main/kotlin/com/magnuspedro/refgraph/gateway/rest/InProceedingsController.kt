@@ -1,8 +1,6 @@
 package com.magnuspedro.refgraph.gateway.rest
 
-import com.magnuspedro.refgraph.entities.requests.CreateAndRelateArticle
-import com.magnuspedro.refgraph.entities.vertices.Article
-import com.magnuspedro.refgraph.entities.vertices.Category
+import com.magnuspedro.refgraph.entities.requests.InProceedingsRequest
 import com.magnuspedro.refgraph.entities.vertices.InProceedings
 import com.magnuspedro.refgraph.gateway.repository.InProceedingsRepository
 import io.swagger.v3.oas.annotations.Operation
@@ -19,14 +17,14 @@ class InProceedingsController(
 
     @PostMapping
     @Operation(summary = "Create inproceedings", security = [SecurityRequirement(name = "bearerAuth")])
-    fun createInProceedings(@RequestBody inProceedings: InProceedings): Mono<InProceedings> {
+    fun createInProceedings(@RequestBody inProceedingsRequest: InProceedingsRequest): Mono<InProceedings> {
+        val inProceedings = InProceedings(
+            title = inProceedingsRequest.title,
+            bookTitle = inProceedingsRequest.bookTitle,
+            date = inProceedingsRequest.date,
+            code = inProceedingsRequest.code
+        )
         return this.inProceedingsRepository.save(inProceedings)
-    }
-
-    @PostMapping("/citation")
-    @Operation(summary = "Create inproceedings with relations", security = [SecurityRequirement(name = "bearerAuth")])
-    fun createInProceedingsCitation(@RequestBody createAndRelateArticle: CreateAndRelateArticle): Mono<MutableList<InProceedings>> {
-        return this.inProceedingsRepository.createRelation(createAndRelateArticle)
     }
 
     @GetMapping

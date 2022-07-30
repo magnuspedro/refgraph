@@ -1,8 +1,6 @@
 package com.magnuspedro.refgraph.gateway.rest
 
-import com.magnuspedro.refgraph.entities.requests.CreateAndRelateArticle
-import com.magnuspedro.refgraph.entities.vertices.Article
-import com.magnuspedro.refgraph.entities.vertices.InProceedings
+import com.magnuspedro.refgraph.entities.requests.ThesisRequest
 import com.magnuspedro.refgraph.entities.vertices.Thesis
 import com.magnuspedro.refgraph.gateway.repository.ThesisRepository
 import io.swagger.v3.oas.annotations.Operation
@@ -19,14 +17,14 @@ class ThesisController(
 
     @PostMapping
     @Operation(summary = "Create thesis", security = [SecurityRequirement(name = "bearerAuth")])
-    fun createThesis(@RequestBody thesis: Thesis): Mono<Thesis> {
+    fun createThesis(@RequestBody thesisRequest: ThesisRequest): Mono<Thesis> {
+        val thesis = Thesis(
+            title = thesisRequest.title,
+            date = thesisRequest.date,
+            school = thesisRequest.school,
+            code = thesisRequest.code
+        )
         return this.thesisRepository.save(thesis)
-    }
-
-    @PostMapping("/citation")
-    @Operation(summary = "Create thesis with realtion", security = [SecurityRequirement(name = "bearerAuth")])
-    fun createThesisCitation(@RequestBody createAndRelateArticle: CreateAndRelateArticle): Mono<MutableList<Thesis>> {
-        return this.thesisRepository.createRelation(createAndRelateArticle)
     }
 
     @GetMapping

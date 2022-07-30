@@ -16,10 +16,11 @@ data class Book(
     @GeneratedValue
     @Schema(hidden = true)
     override val id: UUID? = null,
-    override val name: String? = null,
+    override val title: String? = null,
     override val date: LocalDate? = null,
     val publisher: String? = null,
     val edition: Long? = null,
+    val code: String? = null,
     @Relationship(type = "CITED", direction = INCOMING)
     override var cited: MutableList<BaseArticle>? = mutableListOf(),
     @Relationship(type = "REFERENCED", direction = OUTGOING)
@@ -30,4 +31,4 @@ data class Book(
     override var published: PublicationMedium? = null,
     @Relationship(type = "CATEGORY", direction = INCOMING)
     override var category: Category? = null
-) : BaseArticle(id, name, date, cited, referenced, wrote, published, category)
+) : BaseArticle(id, title, date, cited, referenced, wrote, published, category)

@@ -5,5 +5,5 @@ import org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
 import java.util.UUID
 
 
-interface BookRepositoryBase : ReactiveNeo4jRepository<Book, UUID>, BaseArticleRepositoryCustom {
+interface BookRepositoryBase : ReactiveNeo4jRepository<Book, UUID> {
 }

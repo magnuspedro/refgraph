@@ -5,5 +5,5 @@ import org.springframework.data.neo4j.repository.ReactiveNeo4jRepository
 import java.util.UUID
 
 
-interface ArticleRepository : ReactiveNeo4jRepository<Article, UUID>, BaseArticleRepositoryCustom {
+interface ArticleRepository : ReactiveNeo4jRepository<Article, UUID> {
 }

@@ -1,7 +1,6 @@
 package com.magnuspedro.refgraph.gateway.rest
 
-import com.magnuspedro.refgraph.entities.requests.CreateAndRelateArticle
-import com.magnuspedro.refgraph.entities.vertices.Author
+import com.magnuspedro.refgraph.entities.requests.BookRequest
 import com.magnuspedro.refgraph.entities.vertices.Book
 import com.magnuspedro.refgraph.gateway.repository.BookRepositoryBase
 import io.swagger.v3.oas.annotations.Operation
@@ -19,14 +18,15 @@ class BookController(
 
     @PostMapping
     @Operation(summary = "Create books", security = [SecurityRequirement(name = "bearerAuth")])
-    fun createBook(@RequestBody book: Book): Mono<Book> {
+    fun createBook(@RequestBody bookRequest: BookRequest): Mono<Book> {
+        val book = Book(
+            title = bookRequest.title,
+            date = bookRequest.date,
+            publisher = bookRequest.publisher,
+            edition = bookRequest.edition,
+            code = bookRequest.code
+        )
         return this.bookRepository.save(book)
-    }
-
-    @PostMapping("citation")
-    @Operation(summary = "Create books with relations", security = [SecurityRequirement(name = "bearerAuth")])
-    fun createBookCitation(@RequestBody createAndRelateArticle: CreateAndRelateArticle): Mono<MutableList<Book>> {
-        return this.bookRepository.createRelation(createAndRelateArticle)
     }
 
     @GetMapping
