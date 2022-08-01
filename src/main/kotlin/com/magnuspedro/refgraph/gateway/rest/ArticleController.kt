@@ -2,6 +2,7 @@ package com.magnuspedro.refgraph.gateway.rest
 
 import com.magnuspedro.refgraph.entities.requests.ArticleRelation
 import com.magnuspedro.refgraph.entities.requests.ArticleRequest
+import com.magnuspedro.refgraph.entities.requests.AuthorRelation
 import com.magnuspedro.refgraph.entities.requests.CategoryRelation
 import com.magnuspedro.refgraph.entities.vertices.Article
 import com.magnuspedro.refgraph.gateway.repository.ArticleRepository
@@ -51,6 +52,12 @@ class ArticleController(
     @PostMapping("/relate/category")
     fun relateCategory(@RequestBody categoryRelation: CategoryRelation): Mono<Article> {
         return this.articleRepository.relateCategory(categoryRelation)
+    }
+
+    @Operation(summary = "Relate author", security = [SecurityRequirement(name = "bearerAuth")])
+    @PostMapping("/relate/author")
+    fun relateAuthor(@RequestBody authorRelation: AuthorRelation): Mono<Article> {
+        return this.articleRepository.relateAuthor(authorRelation)
     }
 
     @Operation(summary = "Find all articles", security = [SecurityRequirement(name = "bearerAuth")])

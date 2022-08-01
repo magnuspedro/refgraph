@@ -8,13 +8,13 @@ import reactor.core.publisher.Mono
 
 class AuthorRepositoryCustomImpl(private val neo4jTemplate: ReactiveNeo4jTemplate) : AuthorRepositoryCustom {
     override fun save(author: Author): Mono<Author> {
-        return findAuthorByCode(author.code).flatMap<Author?> {
+        return findByCode(author.code).flatMap<Author?> {
             Mono.error(ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Author already exists"))
         }.switchIfEmpty(neo4jTemplate.save(author))
     }
 
 
-    override fun findAuthorByCode(code: String?): Mono<Author> {
+    override fun findByCode(code: String?): Mono<Author> {
         return neo4jTemplate.findOne(
             "MATCH (Author:Author {code: \$code}) RETURN Category", mapOf(Pair("code", code)), Author::class.java
         )

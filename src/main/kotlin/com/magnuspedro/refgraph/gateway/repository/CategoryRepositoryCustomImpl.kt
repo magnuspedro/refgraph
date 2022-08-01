@@ -8,12 +8,12 @@ import reactor.core.publisher.Mono
 
 class CategoryRepositoryCustomImpl(private val neo4jTemplate: ReactiveNeo4jTemplate) : CategoryRepositoryCustom {
     override fun save(category: Category): Mono<Category> {
-        return findCategoryByCode(category.code).flatMap<Category?> {
+        return findByCode(category.code).flatMap<Category?> {
             Mono.error(ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Category already exists"))
         }.switchIfEmpty(neo4jTemplate.save(category))
     }
 
-    override fun findCategoryByCode(code: String?): Mono<Category> {
+    override fun findByCode(code: String?): Mono<Category> {
         return neo4jTemplate.findOne(
             "MATCH (Category:Category {code: \$code}) RETURN Category", mapOf(Pair("code", code)), Category::class.java
         )

@@ -6,10 +6,9 @@ import org.springframework.data.neo4j.core.schema.Node
 import java.util.*
 
 @Node
-data class Author(
+data class KeyWord(
     @Id
     @GeneratedValue
     val id: UUID? = null,
     val name: String? = null,
-    val code: String? = null
 )
