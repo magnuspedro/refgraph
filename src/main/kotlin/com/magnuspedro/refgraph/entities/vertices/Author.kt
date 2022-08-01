@@ -11,7 +11,6 @@ import java.util.UUID
 data class Author(
     @Id
     @GeneratedValue
-    @JsonIgnore
     val id: UUID? = null,
     val name: String? = null,
     val code: String? = null
