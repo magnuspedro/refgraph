@@ -1,5 +1,7 @@
 package com.magnuspedro.refgraph.entities.vertices
 
+import com.magnuspedro.refgraph.entities.edges.CitationMedium
+import com.magnuspedro.refgraph.entities.requests.enums.ArticleType
 import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.data.neo4j.core.schema.GeneratedValue
 import org.springframework.data.neo4j.core.schema.Id
@@ -15,20 +17,25 @@ data class Article(
     @Id
     @GeneratedValue
     @Schema(hidden = true)
-    override val id: UUID? = null,
-    override val title: String? = null,
-    override val date: LocalDate? = null,
+    val id: UUID? = null,
+    val name: String? = null,
+    val date: LocalDate? = null,
     val doi: String? = null,
     val pages: String? = null,
+    val publisher: String? = null,
+    val edition: Long? = null,
     val code: String? = null,
-    @Relationship(type = "CITED", direction = INCOMING)
-    override var cited: MutableList<BaseArticle>? = mutableListOf(),
-    @Relationship(type = "REFERENCED", direction = OUTGOING)
-    override var referenced: MutableList<BaseArticle>? = mutableListOf(),
-    @Relationship(type = "WROTE")
-    override var wrote: MutableList<Author>? = mutableListOf(),
+    val bookTitle: String? = null,
+    val school: String? = null,
+    val articleType: ArticleType? = null,
     @Relationship(type = "PUBLISHED", direction = INCOMING)
-    override var published: PublicationMedium? = null,
+    var published: CitationMedium? = null,
+    @Relationship(type = "CITED", direction = INCOMING)
+    var cited: Article? = null,
+    @Relationship(type = "REFERENCED", direction = OUTGOING)
+    var referenced: Article? = null,
+    @Relationship(type = "WROTE")
+    var wrote: MutableList<Author>? = mutableListOf(),
     @Relationship(type = "CATEGORY", direction = INCOMING)
-    override var category: Category? = null,
-) : BaseArticle(id, title, date, cited, referenced, wrote, published, category)
+    var category: Category? = null,
+)

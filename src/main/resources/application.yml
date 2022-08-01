@@ -8,6 +8,6 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: ${JWT_URL:}
-          issuer-uri: ${ISSUER_URL:}
+          jwk-set-uri: ${JWT_URL:https://www.googleapis.com/service_accounts/v1/jwk/securetoken%40system.gserviceaccount.com}
+          issuer-uri: ${ISSUER_URL:https://securetoken.google.com/refgraph-11ae5}
 

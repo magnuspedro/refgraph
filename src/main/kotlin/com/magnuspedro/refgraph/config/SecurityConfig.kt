@@ -30,14 +30,16 @@ class SecurityConfig {
 
     @Bean
     fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain? {
-        http.authorizeExchange().pathMatchers(
-            HttpMethod.GET,
-            "/swagger-ui.html/**",
-            "/configuration/**",
-            "/swagger-resources/**",
-            "/v3/api-docs/**",
-            "/webjars/**"
-        ).permitAll().anyExchange().authenticated().and().oauth2ResourceServer().jwt()
+        http.authorizeExchange()
+            .pathMatchers(
+                HttpMethod.GET,
+                "/swagger-ui.html/**",
+                "/configuration/**",
+                "/swagger-resources/**",
+                "/v3/api-docs/**",
+                "/webjars/**"
+            ).permitAll()
+            .anyExchange().authenticated().and().oauth2ResourceServer().jwt()
         return http.build()
     }
 }
