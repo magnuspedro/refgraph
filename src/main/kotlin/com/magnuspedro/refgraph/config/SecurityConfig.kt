@@ -3,16 +3,14 @@ package com.magnuspedro.refgraph.config
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 import io.swagger.v3.oas.annotations.security.SecurityScheme
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
-import org.springframework.http.HttpMethod
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
-import org.springframework.security.config.web.server.ServerHttpSecurity
-import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder
-import org.springframework.security.oauth2.jwt.ReactiveJwtDecoders
-import org.springframework.security.web.server.SecurityWebFilterChain
+
+//import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
+//import org.springframework.security.config.web.server.ServerHttpSecurity
+//import org.springframework.security.oauth2.jwt.*
+//import org.springframework.security.web.server.SecurityWebFilterChain
 
 
-@EnableWebFluxSecurity
+//@EnableWebFluxSecurity
 @SecurityScheme(
     name = "bearerAuth",
     type = SecuritySchemeType.HTTP,
@@ -24,24 +22,23 @@ class SecurityConfig {
     @Value("\${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
     private lateinit var issuerUri: String
 
-    @Bean
-    fun jwtDecoder(): ReactiveJwtDecoder? {
-        return ReactiveJwtDecoders.fromOidcIssuerLocation(issuerUri);
-    }
+//    @Bean
+//    fun jwtDecoder(): ReactiveJwtDecoder? {
+//        return ReactiveJwtDecoders.fromOidcIssuerLocation(issuerUri);
+//    }
 
-    @Bean
-    fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain? {
-        http.authorizeExchange()
-            .pathMatchers(
-                HttpMethod.GET,
-                "/swagger-ui.html/**",
-                "/configuration/**",
-                "/swagger-resources/**",
-                "/v3/api-docs/**",
-                "/webjars/**",
-                "/api/**"
-            ).permitAll()
-            .anyExchange().authenticated().and().oauth2ResourceServer().jwt()
-        return http.build()
-    }
+//    @Bean
+//    fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain? {
+//        http.authorizeExchange()
+//            .pathMatchers(
+//                HttpMethod.GET,
+//                "/swagger-ui.html/**",
+//                "/configuration/**",
+//                "/swagger-resources/**",
+//                "/v3/api-docs/**",
+//                "/webjars/**"
+//            ).permitAll()
+//            .anyExchange().authenticated().and().oauth2ResourceServer().jwt()
+//        return http.build()
+//    }
 }
