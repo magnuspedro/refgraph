@@ -122,12 +122,10 @@ class ArticleRepositoryCustomImpl(
     }
 
     override fun findByCode(code: String?): Mono<Article>? {
-        val id = verifyNull(
-            neo4jTemplate.findOne(
-                "MATCH (Article:Article) WHERE (Article.code=\$code) RETURN Article",
-                mapOf(Pair("code", code)),
-                Article::class.java
-            ), "Article doesn't exists"
+        val id = neo4jTemplate.findOne(
+            "MATCH (Article:Article) WHERE (Article.code=\$code) RETURN Article",
+            mapOf(Pair("code", code)),
+            Article::class.java
         ).map { it.id }
         return articleRepository.findById(id)
     }
