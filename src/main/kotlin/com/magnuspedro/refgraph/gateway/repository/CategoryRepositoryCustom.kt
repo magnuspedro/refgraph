@@ -5,6 +5,5 @@ import reactor.core.publisher.Mono
 
 interface CategoryRepositoryCustom {
     fun save(category: Category): Mono<Category>
-
     fun findByCode(code: String?): Mono<Category>
 }

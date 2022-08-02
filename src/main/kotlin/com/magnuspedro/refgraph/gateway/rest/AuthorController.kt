@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("/api/v1/refgraph/author")
 class AuthorController(
-    val authorRepository: AuthorRepository
+    private val authorRepository: AuthorRepository
 ) {
 
     @Operation(summary = "Create author", security = [SecurityRequirement(name = "bearerAuth")])

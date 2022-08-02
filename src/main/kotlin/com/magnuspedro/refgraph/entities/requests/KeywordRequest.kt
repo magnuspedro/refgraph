@@ -1,5 +1,5 @@
 package com.magnuspedro.refgraph.entities.requests
 
-data class KeyWordRequest(
+data class KeywordRequest(
     val name: String
 )

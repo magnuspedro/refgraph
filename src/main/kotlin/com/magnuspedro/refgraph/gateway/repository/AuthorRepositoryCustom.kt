@@ -5,6 +5,5 @@ import reactor.core.publisher.Mono
 
 interface AuthorRepositoryCustom {
     fun save(author: Author): Mono<Author>
-
     fun findByCode(code: String?): Mono<Author>
 }

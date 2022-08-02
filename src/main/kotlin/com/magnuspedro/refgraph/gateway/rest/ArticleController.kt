@@ -1,11 +1,8 @@
 package com.magnuspedro.refgraph.gateway.rest
 
-import com.magnuspedro.refgraph.entities.requests.ArticleRelation
-import com.magnuspedro.refgraph.entities.requests.ArticleRequest
-import com.magnuspedro.refgraph.entities.requests.AuthorRelation
-import com.magnuspedro.refgraph.entities.requests.CategoryRelation
+import com.magnuspedro.refgraph.entities.requests.*
 import com.magnuspedro.refgraph.entities.vertices.Article
-import com.magnuspedro.refgraph.gateway.repository.ArticleRepository
+import com.magnuspedro.refgraph.gateway.repository.ArticleRepositoryCustom
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.apache.commons.text.WordUtils
@@ -16,7 +13,7 @@ import reactor.core.publisher.Mono
 @RestController
 @RequestMapping("/api/v1/refgraph/article")
 class ArticleController(
-    val articleRepository: ArticleRepository,
+    private val articleRepository: ArticleRepositoryCustom,
 ) {
     @Operation(summary = "Create article", security = [SecurityRequirement(name = "bearerAuth")])
     @PostMapping
@@ -60,9 +57,27 @@ class ArticleController(
         return this.articleRepository.relateAuthor(authorRelation)
     }
 
+    @Operation(summary = "Relate keyword", security = [SecurityRequirement(name = "bearerAuth")])
+    @PostMapping("/relate/keyword")
+    fun relateKeyword(@RequestBody keywordRelation: KeywordRelation): Mono<Article> {
+        return this.articleRepository.relateKeyword(keywordRelation)
+    }
+
+    @Operation(summary = "Relate publication medium", security = [SecurityRequirement(name = "bearerAuth")])
+    @PostMapping("/relate/publication-medium")
+    fun relateKeyword(@RequestBody publicationMedium: PublicationMediumRelation): Mono<Article> {
+        return this.articleRepository.relatePublicationMedium(publicationMedium)
+    }
+
     @Operation(summary = "Find all articles", security = [SecurityRequirement(name = "bearerAuth")])
     @GetMapping
     fun findAllArticles(): Flux<Article> {
         return this.articleRepository.findAll()
+    }
+
+    @Operation(summary = "Find articles by code", security = [SecurityRequirement(name = "bearerAuth")])
+    @GetMapping("/{code}")
+    fun findArticleByCode(@PathVariable code: String): Mono<Article>? {
+        return this.articleRepository.findByCode(code)
     }
 }
