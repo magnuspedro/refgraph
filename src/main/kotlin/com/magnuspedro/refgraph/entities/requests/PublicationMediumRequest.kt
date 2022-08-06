@@ -11,6 +11,5 @@ data class PublicationMediumRequest(
     val initials: String? = null,
     val issn: String? = null,
     @field:NotNull
-    @field:NotEmpty
     val publisherType: PublisherType
 )

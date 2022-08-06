@@ -10,7 +10,6 @@ data class ArticleRequest(
     @field:NotEmpty
     val title: String,
     @field:NotNull
-    @field:NotEmpty
     val date: LocalDate,
     val pages: String? = null,
     val doi: String? = null,
@@ -19,6 +18,5 @@ data class ArticleRequest(
     val bookTitle: String? = null,
     val school: String? = null,
     @field:NotNull
-    @field:NotEmpty
     val articleType: ArticleType
 )
