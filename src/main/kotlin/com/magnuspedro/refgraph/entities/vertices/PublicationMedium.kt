@@ -1,21 +1,25 @@
 package com.magnuspedro.refgraph.entities.vertices
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.magnuspedro.refgraph.config.GenerateCode
 import com.magnuspedro.refgraph.entities.vertices.enums.PublisherType
-import io.swagger.v3.oas.annotations.media.Schema
+import org.apache.commons.text.WordUtils
 import org.springframework.data.neo4j.core.schema.GeneratedValue
 import org.springframework.data.neo4j.core.schema.Id
 import org.springframework.data.neo4j.core.schema.Node
-import java.util.*
 
 @Node
 data class PublicationMedium(
     @Id
-    @GeneratedValue
-    @Schema(hidden = true)
-    val id: UUID? = null,
+    @GeneratedValue(GenerateCode::class)
+    val id: String? = null,
     val name: String? = null,
     val initials: String? = null,
-    val code: String? = null,
     val issn: String? = null,
     val publisherType: PublisherType? = null
-)
+) {
+    @JsonIgnore
+    fun getGeneratedId(): String {
+        return WordUtils.initials(name).uppercase()
+    }
+}

@@ -1,15 +1,21 @@
 package com.magnuspedro.refgraph.entities.vertices
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.magnuspedro.refgraph.config.GenerateCode
+import org.apache.commons.text.WordUtils
 import org.springframework.data.neo4j.core.schema.GeneratedValue
 import org.springframework.data.neo4j.core.schema.Id
 import org.springframework.data.neo4j.core.schema.Node
-import java.util.*
 
 @Node
 data class Category(
     @Id
-    @GeneratedValue
-    val id: UUID? = null,
-    val name: String? = null,
-    var code: String? = null
-)
+    @GeneratedValue(GenerateCode::class)
+    var id: String? = null,
+    val name: String? = null
+) {
+    @JsonIgnore
+    fun getGeneratedId(): String {
+        return WordUtils.initials(name).uppercase()
+    }
+}

@@ -1,8 +1,13 @@
 package com.magnuspedro.refgraph.entities.requests
 
-import com.magnuspedro.refgraph.entities.requests.enums.ArticleType
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 data class ArticleRelation(
-    val firstArticleCode: String? = null,
-    val secondArticleCode: String? = null
+    @field:NotNull
+    @field:NotEmpty
+    val firstArticleCode: String,
+    @field:NotNull
+    @field:NotEmpty
+    val secondArticleCode: String
 )
