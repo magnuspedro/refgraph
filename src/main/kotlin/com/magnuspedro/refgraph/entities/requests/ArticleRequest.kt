@@ -6,7 +6,6 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
 data class ArticleRequest(
-    @field:NotNull
     @field:NotEmpty
     val title: String,
     @field:NotNull
