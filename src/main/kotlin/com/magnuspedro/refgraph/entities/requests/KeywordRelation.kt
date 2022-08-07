@@ -6,5 +6,5 @@ data class KeywordRelation(
     @field:NotEmpty
     val keywordName: String,
     @field:NotEmpty
-    val articleCode: String
+    val articleId: String
 )
