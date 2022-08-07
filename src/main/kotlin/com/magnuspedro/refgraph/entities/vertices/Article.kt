@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.magnuspedro.refgraph.config.GenerateCode
 import com.magnuspedro.refgraph.entities.edges.CitationMedium
 import com.magnuspedro.refgraph.entities.requests.enums.ArticleType
-import org.apache.commons.text.WordUtils
+import com.magnuspedro.refgraph.extensions.Extensions.Companion.abbrv
 import org.springframework.data.neo4j.core.schema.GeneratedValue
 import org.springframework.data.neo4j.core.schema.Id
 import org.springframework.data.neo4j.core.schema.Node
@@ -42,6 +42,6 @@ data class Article(
 ) {
     @JsonIgnore
     fun getGeneratedId(): String {
-        return WordUtils.initials(name).uppercase()
+        return name?.abbrv().toString()
     }
 }

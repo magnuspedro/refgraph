@@ -1,6 +1,6 @@
 package com.magnuspedro.refgraph.config
 
-import org.apache.commons.text.WordUtils
+import com.magnuspedro.refgraph.extensions.Extensions.Companion.abbrv
 import org.springframework.data.neo4j.core.schema.IdGenerator
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
@@ -15,6 +15,6 @@ class GenerateCode : IdGenerator<String> {
             .single { it.name == FIELD_NAME }
             .also { it.isAccessible = true }
             .get(entity)
-        return WordUtils.initials(value as String?).uppercase()
+        return value.toString().abbrv()
     }
 }

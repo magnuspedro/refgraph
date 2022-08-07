@@ -27,6 +27,14 @@ class ArticleRepositoryCustom(
         }.switchIfEmpty(articleRepository.save(article))
     }
 
+    fun findById(id: String): Mono<Article> {
+        return articleRepository.findById(id)
+    }
+
+    fun findAll(): Flux<Article> {
+        return articleRepository.findAll()
+    }
+
     fun relateCited(articleCitationRelation: ArticleCitationRelation): Mono<Article> {
         val (mainArticle, citedArticle) = findArticles(
             articleCitationRelation.mainArticleId,
@@ -124,13 +132,5 @@ class ArticleRepositoryCustom(
             verifyNull(findById(secondId), "Article doesn't exists")
 
         return Pair(article1, article2)
-    }
-
-    fun findById(id: String): Mono<Article> {
-        return articleRepository.findById(id)
-    }
-
-    fun findAll(): Flux<Article> {
-        return articleRepository.findAll()
     }
 }
