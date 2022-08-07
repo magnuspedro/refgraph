@@ -34,10 +34,7 @@ internal class AuthorRepositoryCustomTest {
         verify(repository, atLeastOnce()).save(author)
         StepVerifier
             .create(result)
-            .expectNextMatches {
-                it.id == author.id
-                        && it.name == author.name
-            }
+            .expectNext(author)
             .verifyComplete()
     }
 
@@ -66,10 +63,7 @@ internal class AuthorRepositoryCustomTest {
         verify(repository, atLeastOnce()).findAll()
         StepVerifier
             .create(result)
-            .expectNextMatches {
-                it.id == author.id
-                        && it.name == author.name
-            }
+            .expectNext(author)
             .verifyComplete()
     }
 }

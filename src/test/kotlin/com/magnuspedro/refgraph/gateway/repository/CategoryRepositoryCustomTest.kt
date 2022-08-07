@@ -34,10 +34,7 @@ internal class CategoryRepositoryCustomTest {
         verify(repository, atLeastOnce()).save(category)
         StepVerifier
             .create(result)
-            .expectNextMatches {
-                it.id == category.id
-                        && it.name == category.name
-            }
+            .expectNext(category)
             .verifyComplete()
     }
 
@@ -66,10 +63,7 @@ internal class CategoryRepositoryCustomTest {
         verify(repository, atLeastOnce()).findAll()
         StepVerifier
             .create(result)
-            .expectNextMatches {
-                it.id == category.id
-                        && it.name == category.name
-            }
+            .expectNext(category)
             .verifyComplete()
     }
 }

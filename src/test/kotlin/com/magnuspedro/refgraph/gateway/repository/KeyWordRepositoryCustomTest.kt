@@ -33,10 +33,7 @@ internal class KeyWordRepositoryCustomTest {
         verify(repository, atLeastOnce()).save(keyword)
         StepVerifier
             .create(result)
-            .expectNextMatches {
-                it.id == keyword.id
-                        && it.name == keyword.name
-            }
+            .expectNext(keyword)
             .verifyComplete()
     }
 
@@ -65,10 +62,7 @@ internal class KeyWordRepositoryCustomTest {
         verify(repository, atLeastOnce()).findAll()
         StepVerifier
             .create(result)
-            .expectNextMatches {
-                it.id == keyword.id
-                        && it.name == keyword.name
-            }
+            .expectNext(keyword)
             .verifyComplete()
     }
 }

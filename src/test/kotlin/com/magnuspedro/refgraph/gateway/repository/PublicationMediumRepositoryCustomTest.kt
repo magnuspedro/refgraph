@@ -34,11 +34,7 @@ internal class PublicationMediumRepositoryCustomTest {
         verify(repository, atLeastOnce()).save(publicationMedium)
         StepVerifier
             .create(result)
-            .expectNextMatches {
-                it.id == publicationMedium.id
-                        && it.name == publicationMedium.name
-                        && it.publisherType == publicationMedium.publisherType
-            }
+            .expectNext(publicationMedium)
             .verifyComplete()
     }
 
@@ -67,11 +63,7 @@ internal class PublicationMediumRepositoryCustomTest {
         verify(repository, atLeastOnce()).findAll()
         StepVerifier
             .create(result)
-            .expectNextMatches {
-                it.id == publicationMedium.id
-                        && it.name == publicationMedium.name
-                        && it.publisherType == publicationMedium.publisherType
-            }
+            .expectNext(publicationMedium)
             .verifyComplete()
     }
 }
