@@ -34,14 +34,14 @@ class ArticleController(
 
     @Operation(summary = "Cite article", security = [SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/cited")
-    fun citeArticle(@RequestBody @Valid articleRelation: ArticleRelation): Mono<Article> {
-        return this.articleRepository.relateCited(articleRelation)
+    fun citeArticle(@RequestBody @Valid articleCitationRelation: ArticleCitationRelation): Mono<Article> {
+        return this.articleRepository.relateCited(articleCitationRelation)
     }
 
     @Operation(summary = "Reference article", security = [SecurityRequirement(name = "bearerAuth")])
     @PostMapping("/referenced")
-    fun referenceArticle(@RequestBody @Valid articleRelation: ArticleRelation): Mono<Article> {
-        return this.articleRepository.relateReferenced(articleRelation)
+    fun referenceArticle(@RequestBody @Valid articleReferencingRelation: ArticleReferencingRelation): Mono<Article> {
+        return this.articleRepository.relateReferenced(articleReferencingRelation)
     }
 
     @Operation(summary = "Relate category", security = [SecurityRequirement(name = "bearerAuth")])

@@ -2,9 +2,9 @@ package com.magnuspedro.refgraph.entities.requests
 
 import javax.validation.constraints.NotEmpty
 
-data class ArticleRelation(
+data class ArticleCitationRelation(
     @field:NotEmpty
-    val firstArticleCode: String,
+    val mainArticleId: String,
     @field:NotEmpty
-    val secondArticleCode: String
+    val citedArticleId: String
 )

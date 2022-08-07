@@ -27,24 +27,30 @@ class ArticleRepositoryCustom(
         }.switchIfEmpty(articleRepository.save(article))
     }
 
-    fun relateCited(articleRelation: ArticleRelation): Mono<Article> {
-        val (article1, article2) = findArticles(articleRelation)
+    fun relateCited(articleCitationRelation: ArticleCitationRelation): Mono<Article> {
+        val (mainArticle, citedArticle) = findArticles(
+            articleCitationRelation.mainArticleId,
+            articleCitationRelation.citedArticleId
+        )
 
-        return article1.flatMap { art1 ->
-            article2.flatMap { art2 ->
+        return mainArticle.flatMap { art1 ->
+            citedArticle.flatMap { art2 ->
                 art1.cited = art2
                 neo4jTemplate.save(art1)
             }
         }
     }
 
-    fun relateReferenced(articleRelation: ArticleRelation): Mono<Article> {
-        val (article1, article2) = findArticles(articleRelation)
+    fun relateReferenced(articleReferencingRelation: ArticleReferencingRelation): Mono<Article> {
+        val (mainArticle, referencedArticle) = findArticles(
+            articleReferencingRelation.mainArticleId,
+            articleReferencingRelation.referencingArticleId
+        )
 
-        return article2.flatMap { art2 ->
-            article1.flatMap { art1 ->
-                art2.cited = art1
-                neo4jTemplate.save(art2)
+        return mainArticle.flatMap { art1 ->
+            referencedArticle.flatMap { art2 ->
+                art1.referenced = art2
+                neo4jTemplate.save(art1)
             }
         }
     }
@@ -111,11 +117,11 @@ class ArticleRepositoryCustom(
         }
     }
 
-    private fun findArticles(articleRelation: ArticleRelation): Pair<Mono<Article>, Mono<Article>> {
+    private fun findArticles(firstId: String, secondId: String): Pair<Mono<Article>, Mono<Article>> {
         val article1 =
-            verifyNull(findById(articleRelation.firstArticleCode), "Article doesn't exists")
+            verifyNull(findById(firstId), "Article doesn't exists")
         val article2 =
-            verifyNull(findById(articleRelation.secondArticleCode), "Article doesn't exists")
+            verifyNull(findById(secondId), "Article doesn't exists")
 
         return Pair(article1, article2)
     }
