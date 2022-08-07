@@ -4,7 +4,6 @@ import com.magnuspedro.refgraph.entities.edges.CitationMedium
 import com.magnuspedro.refgraph.entities.requests.*
 import com.magnuspedro.refgraph.entities.vertices.Article
 import com.magnuspedro.refgraph.extensions.Extensions.Companion.verifyNull
-import org.springframework.data.neo4j.core.ReactiveNeo4jTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Repository
 import org.springframework.web.server.ResponseStatusException
@@ -13,7 +12,6 @@ import reactor.core.publisher.Mono
 
 @Repository
 class ArticleRepositoryCustom(
-    private val neo4jTemplate: ReactiveNeo4jTemplate,
     private val categoryRepository: CategoryRepository,
     private val authorRepository: AuthorRepository,
     private val keyWordRepository: KeyWordRepository,
@@ -44,7 +42,7 @@ class ArticleRepositoryCustom(
         return mainArticle.flatMap { art1 ->
             citedArticle.flatMap { art2 ->
                 art1.cited = art2
-                neo4jTemplate.save(art1)
+                articleRepository.save(art1)
             }
         }
     }
@@ -58,7 +56,7 @@ class ArticleRepositoryCustom(
         return mainArticle.flatMap { art1 ->
             referencedArticle.flatMap { art2 ->
                 art1.referenced = art2
-                neo4jTemplate.save(art1)
+                articleRepository.save(art1)
             }
         }
     }
@@ -84,7 +82,7 @@ class ArticleRepositoryCustom(
         return category.flatMap { cat ->
             article.flatMap { art ->
                 art.category?.add(cat)
-                neo4jTemplate.save(art)
+                articleRepository.save(art)
             }
         }
     }
@@ -96,7 +94,7 @@ class ArticleRepositoryCustom(
         return keyword.flatMap { key ->
             article.flatMap { art ->
                 art.keyword?.add(key)
-                neo4jTemplate.save(art)
+                articleRepository.save(art)
             }
         }
     }
@@ -120,7 +118,7 @@ class ArticleRepositoryCustom(
                 )
 
                 art.published = citationMedium
-                neo4jTemplate.save(art)
+                articleRepository.save(art)
             }
         }
     }
