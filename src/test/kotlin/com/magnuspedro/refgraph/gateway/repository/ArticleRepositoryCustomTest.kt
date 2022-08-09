@@ -338,16 +338,16 @@ internal class ArticleRepositoryCustomTest {
     @Test
     fun `Should relate keyword`() {
         val article = Article(id = "N", name = "name", articleType = ArticleType.ARTICLE)
-        val keyword = Keyword("Refactoring", name = "Refactoring")
+        val keyword = Keyword("refactoring", name = "Refactoring")
         val keywordRelation = KeywordRelation(articleId = article.getGeneratedId(), keywordName = keyword.name!!)
         whenever(this.articleRepository.findById(article.getGeneratedId())).thenReturn(Mono.just(article))
-        whenever(this.keyWordRepository.findById(keyword.name!!)).thenReturn(Mono.just(keyword))
+        whenever(this.keyWordRepository.findById(keyword.name?.lowercase()!!)).thenReturn(Mono.just(keyword))
         whenever(this.articleRepository.save(article)).thenReturn(Mono.just(article))
 
         val result = articleRepositoryCustom.relateKeyword(keywordRelation)
 
         verify(this.articleRepository, atLeastOnce()).findById(article.getGeneratedId())
-        verify(this.keyWordRepository, atLeastOnce()).findById(keyword.name!!)
+        verify(this.keyWordRepository, atLeastOnce()).findById(keyword.name?.lowercase()!!)
         StepVerifier
             .create(result)
             .expectNext(article)
@@ -356,16 +356,16 @@ internal class ArticleRepositoryCustomTest {
 
     @Test
     fun `Should return error when relate keyword`() {
-        val article = Article(id = "N", name = "name", articleType = ArticleType.ARTICLE)
-        val keyword = Keyword("Refactoring", name = "Refactoring")
+        val article = Article(id = "NA", name = "name", articleType = ArticleType.ARTICLE)
+        val keyword = Keyword("refactoring", name = "Refactoring")
         val keywordRelation = KeywordRelation(articleId = article.getGeneratedId(), keywordName = keyword.name!!)
         whenever(this.articleRepository.findById(article.getGeneratedId())).thenReturn(Mono.just(article))
-        whenever(this.keyWordRepository.findById(keyword.name!!)).thenReturn(Mono.empty())
+        whenever(this.keyWordRepository.findById(keyword.name?.lowercase()!!)).thenReturn(Mono.empty())
 
         val result = articleRepositoryCustom.relateKeyword(keywordRelation)
 
         verify(this.articleRepository, atLeastOnce()).findById(article.getGeneratedId())
-        verify(this.keyWordRepository, atLeastOnce()).findById(keyword.name!!)
+        verify(this.keyWordRepository, atLeastOnce()).findById(keyword.name?.lowercase()!!)
         StepVerifier
             .create(result)
             .expectError(ResponseStatusException::class.java)
@@ -374,16 +374,16 @@ internal class ArticleRepositoryCustomTest {
 
     @Test
     fun `Should return error when article relate keyword`() {
-        val article = Article(id = "N", name = "name", articleType = ArticleType.ARTICLE)
-        val keyword = Keyword("Refactoring", name = "Refactoring")
+        val article = Article(id = "NA", name = "name", articleType = ArticleType.ARTICLE)
+        val keyword = Keyword("refactoring", name = "Refactoring")
         val keywordRelation = KeywordRelation(articleId = article.getGeneratedId(), keywordName = keyword.name!!)
         whenever(this.articleRepository.findById(article.getGeneratedId())).thenReturn(Mono.empty())
-        whenever(this.keyWordRepository.findById(keyword.name!!)).thenReturn(Mono.just(keyword))
+        whenever(this.keyWordRepository.findById(keyword.name?.lowercase()!!)).thenReturn(Mono.just(keyword))
 
         val result = articleRepositoryCustom.relateKeyword(keywordRelation)
 
         verify(this.articleRepository, atLeastOnce()).findById(article.getGeneratedId())
-        verify(this.keyWordRepository, atLeastOnce()).findById(keyword.name!!)
+        verify(this.keyWordRepository, atLeastOnce()).findById(keyword.name?.lowercase()!!)
         StepVerifier
             .create(result)
             .expectError(ResponseStatusException::class.java)
@@ -392,7 +392,7 @@ internal class ArticleRepositoryCustomTest {
 
     @Test
     fun `Should relate publication medium`() {
-        val article = Article(id = "N", name = "name", articleType = ArticleType.ARTICLE)
+        val article = Article(id = "NA", name = "name", articleType = ArticleType.ARTICLE)
         val publicationMedium = PublicationMedium(id = "P", name = "Medium", publisherType = PublisherType.JOURNAL)
         val publicationMediumRelation = PublicationMediumRelation(
             articleId = article.getGeneratedId(), publicationMediumId = publicationMedium.getGeneratedId()
