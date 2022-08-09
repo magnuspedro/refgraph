@@ -12,9 +12,10 @@ class GenerateName : IdGenerator<String> {
     }
 
     override fun generateId(primaryLabel: String, entity: Any): String {
-        return entity.javaClass.kotlin.memberProperties
+        val name = entity.javaClass.kotlin.memberProperties
             .single { it.name == FIELD_NAME }
             .also { it.isAccessible = true }
-            .get(entity) as String? ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "name cannot be empty")
+            .get(entity) as String?
+        return name?.lowercase() ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST, "name cannot be empty")
     }
 }

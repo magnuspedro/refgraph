@@ -88,7 +88,7 @@ class ArticleRepositoryCustom(
     }
 
     fun relateKeyword(keywordRelation: KeywordRelation): Mono<Article> {
-        val keyword = verifyNull(keyWordRepository.findById(keywordRelation.keywordName), "Keyword doesn't exists")
+        val keyword = verifyNull(keyWordRepository.findById(keywordRelation.keywordName.lowercase()), "Keyword doesn't exists")
         val article = verifyNull(findById(keywordRelation.articleId), "Article doesn't exists")
 
         return keyword.flatMap { key ->

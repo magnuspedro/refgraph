@@ -19,7 +19,7 @@ internal class GenerateNameTest {
         val category = Category(name = "Name")
         val result = generateName.generateId("", category)
 
-        assertEquals(category.name, result)
+        assertEquals(category.name?.lowercase(), result)
     }
 
     @Test
