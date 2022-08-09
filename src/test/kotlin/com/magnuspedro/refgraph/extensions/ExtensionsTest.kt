@@ -20,7 +20,6 @@ internal class ExtensionsTest {
             .verify()
     }
 
-
     @Test
     fun `Should return mono because it is not null`() {
         val category = Category()
@@ -37,5 +36,19 @@ internal class ExtensionsTest {
        val abbrv = "Pedro".abbrv()
 
         Assertions.assertEquals(abbrv,"PE")
+    }
+
+    @Test
+    fun `Should return abbreviated string with single character one word`() {
+        val abbrv = "A".abbrv()
+
+        Assertions.assertEquals(abbrv,"A")
+    }
+
+    @Test
+    fun `Should return abbreviated string with two words`() {
+        val abbrv = "P Magnus".abbrv()
+
+        Assertions.assertEquals(abbrv,"P-MA")
     }
 }
