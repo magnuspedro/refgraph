@@ -1,9 +1,9 @@
 package com.magnuspedro.refgraph.entities.requests
 
 import com.magnuspedro.refgraph.entities.requests.enums.ArticleType
+import jakarta.validation.constraints.NotEmpty
 import java.time.LocalDate
-import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.NotNull
+import jakarta.validation.constraints.NotNull
 
 data class ArticleRequest(
     @field:NotEmpty

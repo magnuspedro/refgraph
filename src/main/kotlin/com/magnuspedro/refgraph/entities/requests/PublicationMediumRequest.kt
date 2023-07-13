@@ -1,8 +1,8 @@
 package com.magnuspedro.refgraph.entities.requests
 
 import com.magnuspedro.refgraph.entities.vertices.enums.PublisherType
-import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.NotNull
+import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotNull
 
 data class PublicationMediumRequest(
     @field:NotEmpty
